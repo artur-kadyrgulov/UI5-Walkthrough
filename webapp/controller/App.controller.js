@@ -1,8 +1,9 @@
 sap.ui.define([
     "sap/ui/core/mvc/Controller",
     "sap/m/MessageToast",
-    "sap/ui/model/json/JSONModel"
- ], (Controller, MessageToast, JSONModel) => {
+    "sap/ui/model/json/JSONModel",
+    "sap/ui/model/resource/ResourceModel"
+ ], (Controller, MessageToast, JSONModel, ResourceModel) => {
     "use strict";
  
     return Controller.extend("ui5.walkthrough.controller.App", {
@@ -15,23 +16,19 @@ sap.ui.define([
             };
             const oModel = new JSONModel(oData);
             this.getView().setModel(oModel);
+
+            const i18nModel = new ResourceModel({
+                bundleName: "ui5.walkthrough.i18n.i18n"
+            });
+            this.getView().setModel(i18nModel, "i18n");
         },
 
         onShowHello() {
-            MessageToast.show("This message should appear in the message toast", {
-                duration: 3000,                  // default
-                width: "15em",                   // default
-                my: "center bottom",             // default
-                at: "center bottom",             // default
-                of: window,                      // default
-                offset: "0 0",                   // default
-                collision: "fit fit",            // default
-                onClose: null,                   // default
-                autoClose: true,                 // default
-                animationTimingFunction: "ease", // default
-                animationDuration: 1000,         // default
-                closeOnBrowserNavigation: true   // default
-            });
+            const oBundle = this.getView().getModel("i18n").getResourceBundle();
+            const sRecipient = this.getView().getModel().getProperty("/recipient/name");
+            const sMsg = oBundle.getText("helloMsg", [sRecipient]);
+
+            MessageToast.show(sMsg);
         }
     });
  });

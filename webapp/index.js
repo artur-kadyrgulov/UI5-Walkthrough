@@ -1,13 +1,13 @@
 sap.ui.define([
-    "sap/ui/core/ComponentContainer"
+	"sap/ui/core/ComponentContainer"
 ], (ComponentContainer) => {
-    "use strict";
+	"use strict";
 
-    new ComponentContainer({
-        name: "ui5.walkthrough",
-        settings: {
-            id: "walkthrough"
-        },
-        async: true
-    }).placeAt("content");
+	new ComponentContainer({
+		name: "ui5.walkthrough",
+		settings : {
+			id : "walkthrough"
+		},
+		async: true
+	}).placeAt("content");
 });

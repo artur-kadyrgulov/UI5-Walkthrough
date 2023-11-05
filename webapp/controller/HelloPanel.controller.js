@@ -20,6 +20,11 @@ sap.ui.define([
                 name: "ui5.walkthrough.view.HelloDialog"
             });
             this.pDialog.then((oDialog) => oDialog.open());
-       }
+        },
+
+        onCloseDialog() {
+            this.byId("helloDialog").close();
+        }
+
     });
  });
